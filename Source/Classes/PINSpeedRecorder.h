@@ -44,8 +44,8 @@ typedef enum : NSUInteger {
 
 - (PINSpeedRecorderConnectionStatus)connectionStatus;
 
-#if DEBUG
-- (void)setCurrentBytesPerSecond:(float)currentBPS;
-#endif
+//#if DEBUG
+//- (void)setCurrentBytesPerSecond:(float)currentBPS;
+//#endif
 
 @end

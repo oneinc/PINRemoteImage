@@ -28,10 +28,10 @@
 {
     NSCache <NSString *, PINSpeedMeasurement *>*_speedMeasurements;
     SCNetworkReachabilityRef _reachability;
-#if DEBUG
-    BOOL _overrideBPS;
-    float _currentBPS;
-#endif
+//#if DEBUG
+//    BOOL _overrideBPS;
+//    float _currentBPS;
+//#endif
 }
 
 @property (nonatomic, strong) PINRemoteLock *lock;
@@ -128,12 +128,12 @@
 {
     __block float startAdjustedBytesPerSecond = -1;
     [self.lock lockWithBlock:^{
-#if DEBUG
-        if (_overrideBPS) {
-            startAdjustedBytesPerSecond = _currentBPS;
-            return;
-        }
-#endif
+//#if DEBUG
+//        if (_overrideBPS) {
+//            startAdjustedBytesPerSecond = _currentBPS;
+//            return;
+//        }
+//#endif
         PINSpeedMeasurement *measurement = [self->_speedMeasurements objectForKey:host];
         if (measurement == 0) {
             startAdjustedBytesPerSecond = -1;
@@ -154,19 +154,19 @@
     return timeToFirstByte;
 }
 
-#if DEBUG
-- (void)setCurrentBytesPerSecond:(float)currentBPS
-{
-    [self.lock lockWithBlock:^{
-        if (currentBPS == -1) {
-            _overrideBPS = NO;
-        } else {
-            _overrideBPS = YES;
-        }
-        _currentBPS = currentBPS;
-    }];
-}
-#endif
+//#if DEBUG
+//- (void)setCurrentBytesPerSecond:(float)currentBPS
+//{
+//    [self.lock lockWithBlock:^{
+//        if (currentBPS == -1) {
+//            _overrideBPS = NO;
+//        } else {
+//            _overrideBPS = YES;
+//        }
+//        _currentBPS = currentBPS;
+//    }];
+//}
+//#endif
 
 // Cribbed from Apple's reachability: https://developer.apple.com/library/content/samplecode/Reachability/Listings/Reachability_Reachability_m.html#//apple_ref/doc/uid/DTS40007324-Reachability_Reachability_m-DontLinkElementID_9
 
